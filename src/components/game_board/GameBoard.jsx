@@ -1,21 +1,23 @@
 import { useState } from "react";
 
-export default function GameBoard() {
+export default function GameBoard({onSelectActivePlayer, activePlayer}) {
   const initialBoard = [
     [null, null, null],
     [null, null, null],
     [null, null, null],
   ];
+
   const [gameBoard, setGameBoard] = useState(initialBoard);
 
   const handlePlayClick = (rowIndex, columnIndex) => {
-      setGameBoard((updatedGameBoard) => {
-          let newGameBoard = [
-              ...updatedGameBoard.map((innerArray) => [...innerArray]),
-          ];
-          newGameBoard[rowIndex] [columnIndex] = "X";
+    setGameBoard((updatedGameBoard) => {
+      let newGameBoard = [
+        ...updatedGameBoard.map((innerArray) => [...innerArray]),
+      ];
+      newGameBoard[rowIndex][columnIndex] = activePlayer;
       return newGameBoard;
     });
+      onSelectActivePlayer();
   };
 
   return (
